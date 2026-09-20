@@ -6,13 +6,23 @@
   <title>MIMP - Acceso a la Información Pública</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Preconexión al servidor de imágenes para acelerar la carga -->
+  <!-- Preconexión a servidores externos -->
   <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
   <link rel="dns-prefetch" href="https://i.postimg.cc">
 
   <style>
+    :root {
+      --mimp-red: #c8102e;
+      --mimp-dark-red: #7a0016;
+      --mimp-accent: #ff4757;
+      --mimp-gold: #ffc107;
+      --bg-dark: #0f0507;
+      --card-bg: rgba(255, 255, 255, 0.96);
+      --glass-border: rgba(255, 255, 255, 0.25);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -21,11 +31,12 @@
     }
 
     body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #1a080c;
-      background-image: radial-gradient(#c8102e 1px, transparent 1px);
-      background-size: 20px 20px;
-      color: #333;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(200, 16, 46, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(122, 0, 22, 0.3) 0%, transparent 50%);
+      color: #222;
       width: 100vw;
       height: 100vh;
       overflow: hidden;
@@ -34,370 +45,565 @@
       align-items: center;
     }
 
-    /* TÓTEM VERTICAL 9:16 */
+    /* TÓTEM VERTICAL (RESPONSIVO Y MODERNO) */
     .totem-frame {
       width: 100%;
-      max-width: 480px;
+      max-width: 490px;
       height: 100vh;
-      max-height: 853px;
-      background: linear-gradient(135deg, #c8102e 0%, #7a0016 100%); /* Rojo Institucional MIMP */
-      border-radius: 24px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      max-height: 860px;
+      background: linear-gradient(165deg, #c8102e 0%, #600010 100%);
+      border-radius: 28px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.7), inset 0 1px 1px rgba(255,255,255,0.3);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 20px 16px;
+      padding: 16px;
       position: relative;
       overflow: hidden;
-      border: 3px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid var(--glass-border);
     }
 
-    /* CABECERA INSTITUCIONAL */
+    /* HEADER FLOTANTE */
     header {
-      background: rgba(255, 255, 255, 0.98);
-      border-radius: 16px;
-      padding: 12px 14px;
-      text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 12px 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
       display: flex;
       flex-direction: column;
-      align-items: center;
       gap: 10px;
+      z-index: 5;
     }
 
-    /* CONTENEDOR DE LOGOS SUPERIORES (IZQUIERDA Y DERECHA) */
     .header-logos {
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      gap: 10px;
     }
 
-    /* LOGO MIMP (IZQUIERDA) */
     .logo-mimp {
       height: 38px;
       max-width: 48%;
-      width: auto;
       object-fit: contain;
     }
 
-    /* LOGO PERÚ RESPONDE (DERECHA - MÁS GRANDE) */
     .logo-peru-responde {
       height: 48px;
       max-width: 50%;
-      width: auto;
       object-fit: contain;
     }
 
-    .header-subtitle {
-      color: #c8102e;
-      font-size: 0.95rem;
-      font-weight: 700;
+    .header-badge {
+      background: #fff5f6;
+      color: var(--mimp-red);
+      font-size: 0.8rem;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-top: 2px solid #f0f0f0;
-      padding-top: 6px;
-      width: 100%;
+      letter-spacing: 0.8px;
+      padding: 6px 10px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid rgba(200, 16, 46, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #2ed573;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 213, 115, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(46, 213, 115, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 213, 115, 0); }
+    }
+
+    /* ÁREA DE CONTENIDO PRINCIPAL */
     .content-area {
       flex: 1;
       margin: 12px 0;
-      background: rgba(255, 255, 255, 0.98);
-      border-radius: 18px;
+      background: var(--card-bg);
+      border-radius: 20px;
       padding: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
       overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    .content-area::-webkit-scrollbar {
+      width: 4px;
+    }
+    .content-area::-webkit-scrollbar-thumb {
+      background: rgba(200, 16, 46, 0.3);
+      border-radius: 10px;
     }
 
     .info-section {
       display: none;
-      animation: fadeIn 0.3s ease-in-out forwards;
+      animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     .info-section.active {
       display: block;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(14px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .info-section h2 {
-      color: #c8102e;
-      font-size: 1.25rem;
-      border-bottom: 3px solid #c8102e;
-      padding-bottom: 6px;
-      margin-bottom: 8px;
+    .section-header {
       text-align: center;
-      font-weight: 700;
-    }
-
-    .section-subtitle {
-      text-align: center;
-      font-size: 0.85rem;
-      color: #666;
       margin-bottom: 14px;
     }
 
-    .list-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .section-header h2 {
+      color: var(--mimp-red);
+      font-size: 1.2rem;
+      font-weight: 800;
     }
 
-    .item-card {
-      display: flex;
-      align-items: center;
-      background: #fdfdfd;
-      border-radius: 12px;
-      padding: 10px 12px;
-      border: 1px solid #eee;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.04);
-      gap: 12px;
-    }
-
-    .icon-box {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: #fff;
-      font-weight: bold;
-    }
-
-    .bg-red { background: #e53935; }
-    .bg-blue { background: #0288d1; }
-    .bg-orange { background: #f57c00; }
-    .bg-teal { background: #00897b; }
-    .bg-purple { background: #8e24aa; }
-
-    .item-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #222;
-      line-height: 1.2;
-    }
-
-    .item-desc {
+    .section-header p {
       font-size: 0.8rem;
       color: #666;
       margin-top: 2px;
     }
 
-    .tag-note {
-      background: #ffebee;
-      color: #c8102e;
-      padding: 8px;
-      border-radius: 8px;
-      font-size: 0.78rem;
-      text-align: center;
-      margin-top: 10px;
-      font-weight: 500;
-      border: 1px dashed #ef9a9a;
-    }
-
-    .nav-buttons {
-      display: flex;
-      flex-direction: column;
+    /* TARJETAS INTERACTIVAS (CANALES) */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
 
-    .btn-totem {
+    .interactive-card {
       background: #ffffff;
-      color: #c8102e;
-      border: 2px solid #ffffff;
-      padding: 13px 12px;
+      border: 1px solid #f0f0f0;
       border-radius: 14px;
-      font-size: 1.05rem;
-      font-weight: 700;
+      padding: 12px 10px;
+      text-align: center;
       cursor: pointer;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
+
+    .interactive-card:active, .interactive-card.selected {
+      transform: scale(0.97);
+      border-color: var(--mimp-red);
+      background: #fff0f2;
+    }
+
+    .card-icon {
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .card-sub {
+      font-size: 0.72rem;
+      color: #777;
+      margin-top: 2px;
+    }
+
+    /* TIMELINE PROCESO DE ATENCIÓN */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+
+    .timeline-step {
+      display: flex;
+      gap: 12px;
+      background: #fff;
+      padding: 12px;
+      border-radius: 14px;
+      border-left: 4px solid var(--mimp-red);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .timeline-step:active {
+      transform: translateX(4px);
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      background: var(--mimp-red);
+      color: white;
+      font-weight: 800;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-size: 0.9rem;
+      color: #111;
+    }
+
+    .step-content p {
+      font-size: 0.78rem;
+      color: #666;
+    }
+
+    /* SIMULADOR INTERACTIVO (DEMO PARA EXPOSICIÓN) */
+    .simulator-box {
+      background: #f8f9fa;
+      border: 1px dashed var(--mimp-red);
+      border-radius: 14px;
+      padding: 12px;
+      margin-top: 12px;
+    }
+
+    .simulator-box label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #333;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .simulator-input {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+    }
+
+    .btn-simulate {
+      width: 100%;
+      background: var(--mimp-red);
+      color: white;
+      border: none;
+      padding: 9px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+
+    .ticket-result {
+      display: none;
+      margin-top: 10px;
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      color: #1b5e20;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      text-align: center;
+    }
+
+    /* PROPUESTA DE VALOR / MÍA IA */
+    .ia-banner {
+      background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+      color: white;
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .ia-avatar {
+      font-size: 2rem;
+    }
+
+    .ia-info h4 {
+      font-size: 0.9rem;
+      color: #ffc107;
+    }
+
+    .ia-info p {
+      font-size: 0.75rem;
+      color: #d1d5db;
+    }
+
+    .value-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      padding: 10px 12px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      border: 1px solid #eee;
+    }
+
+    .value-icon {
+      font-size: 1.2rem;
+    }
+
+    .value-text strong {
+      display: block;
+      font-size: 0.85rem;
+      color: #222;
+    }
+
+    .value-text span {
+      font-size: 0.75rem;
+      color: #666;
+    }
+
+    /* NAV NAVEGACIÓN BOTTOM */
+    .nav-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 8px;
     }
 
-    .btn-totem:active, .btn-totem.active-btn {
-      background: #ffc107;
-      color: #000;
-      border-color: #ffc107;
+    .btn-totem {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 12px 6px;
+      border-radius: 14px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-totem .btn-icon {
+      font-size: 1.1rem;
+    }
+
+    .btn-totem.active-btn {
+      background: #ffffff;
+      color: var(--mimp-red);
+      border-color: #ffffff;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+      transform: translateY(-2px);
     }
 
     footer {
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(255, 255, 255, 0.8);
       text-align: center;
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       margin-top: 8px;
+      font-weight: 500;
     }
   </style>
 </head>
 <body>
 
   <div class="totem-frame">
+    
+    <!-- HEADER CON LOGOS Y ESTADO VIVO -->
     <header>
       <div class="header-logos">
-        <!-- MIMP a la izquierda -->
         <img src="https://i.postimg.cc/7h1HKLP9/PCM-MIMP-(1).webp" alt="Logo MIMP" class="logo-mimp" loading="eager" fetchpriority="high">
-        <!-- Perú Responde a la derecha (más grande) -->
         <img src="https://i.postimg.cc/RFND03MD/Logo-Peru-Responde-Logo-horizontal.png" alt="Logo Perú Responde" class="logo-peru-responde" loading="eager" fetchpriority="high">
       </div>
-      <div class="header-subtitle">Acceso a la Información Pública</div>
+      <div class="header-badge">
+        <span class="live-dot"></span> Acceso a la Información Pública
+      </div>
     </header>
 
+    <!-- PANTALLAS INTERACTIVAS -->
     <main class="content-area">
       
-      <!-- CANALES DE ATENCIÓN -->
+      <!-- SECCIÓN 1: CANALES Y SIMULADOR -->
       <div id="canales" class="info-section">
-        <h2>Canales de Atención</h2>
-        <div class="section-subtitle">¿Cómo puedes acceder a la información pública del MIMP?</div>
-        
-        <div class="list-container">
-          <div class="item-card">
-            <div class="icon-box bg-red">🏢</div>
-            <div>
-              <div class="item-title">Mesa de partes presencial</div>
-              <div class="item-desc">En nuestras oficinas</div>
-            </div>
+        <div class="section-header">
+          <h2>Canales de Atención</h2>
+          <p>Selecciona una opción para simular un trámite</p>
+        </div>
+
+        <div class="grid-cards">
+          <div class="interactive-card selected" onclick="selectChannel(this, 'Mesa de Partes Digital')">
+            <div class="card-icon">💻</div>
+            <div class="card-title">Mesa Digital</div>
+            <div class="card-sub">Atención 24/7 en web</div>
           </div>
 
-          <div class="item-card">
-            <div class="icon-box bg-blue">💻</div>
-            <div>
-              <div class="item-title">Mesa de partes digital</div>
-              <div class="item-desc">A través de nuestra página web</div>
-            </div>
+          <div class="interactive-card" onclick="selectChannel(this, 'Plataforma FACILITA')">
+            <div class="card-icon">🚀</div>
+            <div class="card-title">FACILITA</div>
+            <div class="card-sub">Trámite rápido Ley 27806</div>
           </div>
 
-          <div class="item-card">
-            <div class="icon-box bg-orange">✉️</div>
-            <div>
-              <div class="item-title">Correo electrónico</div>
-              <div class="item-desc">Escríbenos tu solicitud</div>
-            </div>
+          <div class="interactive-card" onclick="selectChannel(this, 'Mesa Presencial')">
+            <div class="card-icon">🏢</div>
+            <div class="card-title">Presencial</div>
+            <div class="card-sub">Sede central Jirón Camaná</div>
           </div>
 
-          <div class="item-card">
-            <div class="icon-box bg-teal">🚀</div>
-            <div>
-              <div class="item-title">Plataforma FACILITA</div>
-              <div class="item-desc">Accede de manera rápida y segura</div>
-            </div>
+          <div class="interactive-card" onclick="selectChannel(this, 'Correo Electrónico')">
+            <div class="card-icon">✉️</div>
+            <div class="card-title">Correo Elec.</div>
+            <div class="card-sub">informacionpublica@mimp.gob.pe</div>
           </div>
         </div>
 
-        <div class="tag-note">
-          💡 No necesitas justificar por qué solicitas la información
+        <!-- SIMULADOR EN VIVO PARA LA EXPOSICIÓN -->
+        <div class="simulator-box">
+          <label id="channel-label">Simulador de Solicitud (Canal: Mesa Digital)</label>
+          <input type="text" id="solicitudInput" class="simulator-input" placeholder="Ej: Solicito presupuesto institucional...">
+          <button class="btn-simulate" onclick="generarTicket()">⚡ Generar Solicitud Demo</button>
+          
+          <div id="ticketResult" class="ticket-result">
+            ✅ <strong>¡Solicitud Generada!</strong><br>
+            Expediente: <span id="expedienteNum">MIMP-2026-00892</span><br>
+            Plazo de respuesta: <strong>10 días hábiles max.</strong>
+          </div>
         </div>
       </div>
 
-      <!-- PROCESOS DE ATENCIÓN -->
+      <!-- SECCIÓN 2: LÍNEA DE TIEMPO INTERACTIVA DEL PROCESO -->
       <div id="procesos" class="info-section active">
-        <h2>¿Cómo es el proceso?</h2>
-        <div class="section-subtitle">Tu solicitud se atiende en 10 días hábiles</div>
-        
-        <div class="list-container">
-          <div class="item-card">
-            <div class="icon-box bg-red">1</div>
-            <div>
-              <div class="item-title">Recepción y registro</div>
-              <div class="item-desc">De la solicitud (1 día)</div>
+        <div class="section-header">
+          <h2>Proceso de Atención</h2>
+          <p>Toca cada etapa para ver los plazos legales</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-step" onclick="alert('Paso 1: La solicitud es recepcionada y clasificada por el responsable de la entidad en 24 horas.')">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Registro y Recepción</h4>
+              <p>Se genera tu número de expediente (Día 1)</p>
             </div>
           </div>
 
-          <div class="item-card">
-            <div class="icon-box bg-blue">2</div>
-            <div>
-              <div class="item-title">Búsqueda y análisis</div>
-              <div class="item-desc">De la información (1 a 4 días)</div>
+          <div class="timeline-step" onclick="alert('Paso 2: La oficina correspondiente ubica la documentación solicitada.')">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Búsqueda y Análisis</h4>
+              <p>Verificación de la información (Días 1 a 4)</p>
             </div>
           </div>
 
-          <div class="item-card">
-            <div class="icon-box bg-orange">3</div>
-            <div>
-              <div class="item-title">Respuesta y notificación</div>
-              <div class="item-desc">(5 a 10 días)</div>
+          <div class="timeline-step" onclick="alert('Paso 3: Notificación por correo o entrega presencial según lo solicitado.')">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Entrega y Notificación</h4>
+              <p>Respuesta final al ciudadano (Máx. 10 días hábiles)</p>
             </div>
           </div>
         </div>
 
-        <div class="tag-note">
-          ⏱️ <strong>Nota:</strong> El plazo máximo es de 10 días hábiles según la normativa vigente.
+        <div style="background: #fff3cd; color: #856404; padding: 10px; border-radius: 10px; font-size: 0.75rem; margin-top: 12px; text-align: center;">
+          ⏱️ Sin justificación: No requiere explicar el motivo de la solicitud.
         </div>
       </div>
 
-      <!-- PROPUESTA DE VALOR -->
+      <!-- SECCIÓN 3: PROPUESTA DE VALOR Y MÍA IA -->
       <div id="propuestas" class="info-section">
-        <h2>Nuestra Propuesta de Valor</h2>
-        <div class="section-subtitle">Más información, más derechos, más confianza</div>
-        
-        <div class="list-container">
-          <div class="item-card">
-            <div class="icon-box bg-red">🛡️</div>
-            <div>
-              <div class="item-title">Transparencia</div>
-              <div class="item-desc">En la gestión pública</div>
-            </div>
-          </div>
+        <div class="section-header">
+          <h2>Propuesta de Valor</h2>
+          <p>Innovación pública al servicio del ciudadano</p>
+        </div>
 
-          <div class="item-card">
-            <div class="icon-box bg-purple">♿</div>
-            <div>
-              <div class="item-title">Atención inclusiva</div>
-              <div class="item-desc">Y oportuna</div>
-            </div>
+        <!-- DESTACADO MÍA IA -->
+        <div class="ia-banner">
+          <div class="ia-avatar">🤖</div>
+          <div class="ia-info">
+            <h4>Mía - Asistente Virtual IA</h4>
+            <p>Atención automatizada 24/7 sobre servicios del MIMP.</p>
           </div>
+        </div>
 
-          <div class="item-card">
-            <div class="icon-box bg-teal">🌱</div>
-            <div>
-              <div class="item-title">Un MIMP más cercano</div>
-              <div class="item-desc">A la ciudadanía</div>
-            </div>
+        <div class="value-item">
+          <div class="value-icon">🛡️</div>
+          <div class="value-text">
+            <strong>Transparencia Activa</strong>
+            <span>Acceso abierto a datos e informes institucionales.</span>
           </div>
+        </div>
 
-          <div class="item-card">
-            <div class="icon-box bg-blue">👥</div>
-            <div>
-              <div class="item-title">Sociedad más justa</div>
-              <div class="item-desc">Construimos juntos e igualitaria</div>
-            </div>
+        <div class="value-item">
+          <div class="value-icon">♿</div>
+          <div class="value-text">
+            <strong>Atención Inclusiva</strong>
+            <span>Canales adaptados para personas con discapacidad.</span>
           </div>
+        </div>
 
-          <div class="item-card">
-            <div class="icon-box bg-orange">🤖</div>
-            <div>
-              <div class="item-title">Mía - Asistente Virtual</div>
-              <div class="item-desc">Consulta 24 horas, todos los días</div>
-            </div>
+        <div class="value-item">
+          <div class="value-icon">🌱</div>
+          <div class="value-text">
+            <strong>Gobierno Cercano</strong>
+            <span>Reducción de barreras en la gestión pública.</span>
           </div>
         </div>
       </div>
 
     </main>
 
+    <!-- NAVEGACIÓN INFERIOR (TIPO TAB BAR) -->
     <nav class="nav-buttons">
-      <button class="btn-totem" onclick="mostrarSeccion('canales', this)">📞 Canales de Atención</button>
-      <button class="btn-totem active-btn" onclick="mostrarSeccion('procesos', this)">📋 Proceso de Atención</button>
-      <button class="btn-totem" onclick="mostrarSeccion('propuestas', this)">⭐ Propuesta de Valor</button>
+      <button class="btn-totem" onclick="mostrarSeccion('canales', this)">
+        <span class="btn-icon">📞</span>
+        <span>Canales</span>
+      </button>
+      <button class="btn-totem active-btn" onclick="mostrarSeccion('procesos', this)">
+        <span class="btn-icon">📋</span>
+        <span>Proceso</span>
+      </button>
+      <button class="btn-totem" onclick="mostrarSeccion('propuestas', this)">
+        <span class="btn-icon">⭐</span>
+        <span>Valor e IA</span>
+      </button>
     </nav>
 
-    <footer>Toca la pantalla para interactuar • MIMP</footer>
+    <footer>Toca la pantalla para interactuar • MIMP Perú 2026</footer>
   </div>
 
   <script>
+    let selectedChannelName = 'Mesa Digital';
+
     function mostrarSeccion(idSeccion, btn) {
       document.querySelectorAll('.info-section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.btn-totem').forEach(b => b.classList.remove('active-btn'));
       document.getElementById(idSeccion).classList.add('active');
       btn.classList.add('active-btn');
+    }
+
+    function selectChannel(card, channelName) {
+      document.querySelectorAll('.interactive-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedChannelName = channelName;
+      document.getElementById('channel-label').innerText = `Simulador de Solicitud (Canal: ${channelName})`;
+    }
+
+    function generarTicket() {
+      const input = document.getElementById('solicitudInput').value;
+      if (!input.trim()) {
+        alert('Por favor, escribe una solicitud ficticia para probar la demostración.');
+        return;
+      }
+      const randomNum = Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('expedienteNum').innerText = `EXP-${randomNum}-2026/MIMP`;
+      document.getElementById('ticketResult').style.display = 'block';
     }
   </script>
 </body>
