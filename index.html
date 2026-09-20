@@ -74,10 +74,18 @@
       gap: 10px;
     }
 
-    /* PROPORCIÓN IDÉNTICA PARA AMBOS LOGOS */
-    .logo-header {
+    /* LOGO MIMP (IZQUIERDA) */
+    .logo-mimp {
       height: 38px;
       max-width: 48%;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* LOGO PERÚ RESPONDE (DERECHA - MÁS GRANDE) */
+    .logo-peru-responde {
+      height: 48px;
+      max-width: 50%;
       width: auto;
       object-fit: contain;
     }
@@ -236,9 +244,9 @@
     <header>
       <div class="header-logos">
         <!-- MIMP a la izquierda -->
-        <img src="https://i.postimg.cc/7h1HKLP9/PCM-MIMP-(1).webp" alt="Logo MIMP" class="logo-header" loading="eager" fetchpriority="high">
-        <!-- Perú Responde a la derecha -->
-        <img src="https://i.postimg.cc/RFND03MD/Logo-Peru-Responde-Logo-horizontal.png" alt="Logo Perú Responde" class="logo-header" loading="eager" fetchpriority="high">
+        <img src="https://i.postimg.cc/7h1HKLP9/PCM-MIMP-(1).webp" alt="Logo MIMP" class="logo-mimp" loading="eager" fetchpriority="high">
+        <!-- Perú Responde a la derecha (más grande) -->
+        <img src="https://i.postimg.cc/RFND03MD/Logo-Peru-Responde-Logo-horizontal.png" alt="Logo Perú Responde" class="logo-peru-responde" loading="eager" fetchpriority="high">
       </div>
       <div class="header-subtitle">Acceso a la Información Pública</div>
     </header>
