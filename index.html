@@ -8,6 +8,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
+  <!-- Preconexión al servidor de imágenes para acelerar la carga -->
+  <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
+  <link rel="dns-prefetch" href="https://i.postimg.cc">
+
   <style>
     * {
       box-sizing: border-box;
@@ -48,35 +52,33 @@
       border: 3px solid rgba(255, 255, 255, 0.2);
     }
 
-    /* LOGO PERÚ RESPONDE - ESQUINA SUPERIOR DERECHA */
-    .logo-peru-responde {
-      position: absolute;
-      top: 26px;
-      right: 24px;
-      height: 32px;
-      width: auto;
-      object-fit: contain;
-      z-index: 10;
-      filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.2));
-    }
-
-    /* CABECERA CON LOGO */
+    /* CABECERA INSTITUCIONAL */
     header {
       background: rgba(255, 255, 255, 0.98);
       border-radius: 16px;
-      padding: 14px 10px;
+      padding: 12px 14px;
       text-align: center;
       box-shadow: 0 8px 20px rgba(0,0,0,0.25);
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
-    .logo-mimp {
-      max-width: 85%;
-      height: auto;
-      max-height: 52px;
+    /* CONTENEDOR DE LOGOS SUPERIORES (IZQUIERDA Y DERECHA) */
+    .header-logos {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 10px;
+    }
+
+    /* PROPORCIÓN IDÉNTICA PARA AMBOS LOGOS */
+    .logo-header {
+      height: 38px;
+      max-width: 48%;
+      width: auto;
       object-fit: contain;
     }
 
@@ -231,17 +233,19 @@
 <body>
 
   <div class="totem-frame">
-    <!-- LOGO PERÚ RESPONDE -->
-    <img src="https://i.postimg.cc/RFND03MD/Logo-Peru-Responde-Logo-horizontal.png" alt="Logo Perú Responde" class="logo-peru-responde">
-
     <header>
-      <img src="https://i.postimg.cc/7h1HKLP9/PCM-MIMP-(1).webp" alt="Logo MIMP" class="logo-mimp">
+      <div class="header-logos">
+        <!-- MIMP a la izquierda -->
+        <img src="https://i.postimg.cc/7h1HKLP9/PCM-MIMP-(1).webp" alt="Logo MIMP" class="logo-header" loading="eager" fetchpriority="high">
+        <!-- Perú Responde a la derecha -->
+        <img src="https://i.postimg.cc/RFND03MD/Logo-Peru-Responde-Logo-horizontal.png" alt="Logo Perú Responde" class="logo-header" loading="eager" fetchpriority="high">
+      </div>
       <div class="header-subtitle">Acceso a la Información Pública</div>
     </header>
 
     <main class="content-area">
       
-      <!-- CANALES DE ATENCIÓN (SEGÚN TRÍPTICO) -->
+      <!-- CANALES DE ATENCIÓN -->
       <div id="canales" class="info-section">
         <h2>Canales de Atención</h2>
         <div class="section-subtitle">¿Cómo puedes acceder a la información pública del MIMP?</div>
@@ -285,7 +289,7 @@
         </div>
       </div>
 
-      <!-- PROCESOS DE ATENCIÓN (SEGÚN TRÍPTICO) -->
+      <!-- PROCESOS DE ATENCIÓN -->
       <div id="procesos" class="info-section active">
         <h2>¿Cómo es el proceso?</h2>
         <div class="section-subtitle">Tu solicitud se atiende en 10 días hábiles</div>
@@ -321,7 +325,7 @@
         </div>
       </div>
 
-      <!-- PROPUESTA DE VALOR (SEGÚN TRÍPTICO) -->
+      <!-- PROPUESTA DE VALOR -->
       <div id="propuestas" class="info-section">
         <h2>Nuestra Propuesta de Valor</h2>
         <div class="section-subtitle">Más información, más derechos, más confianza</div>
