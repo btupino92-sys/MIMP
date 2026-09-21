@@ -249,7 +249,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s ease;
+      transition: opacity 0.3s ease, transform 0.4s ease;
+      opacity: 1;
     }
 
     .channel-viewer-title {
@@ -348,19 +349,20 @@
       color: var(--mimp-red);
     }
 
-    /* CONTENIDO EXPANDIBLE */
+    /* CONTENIDO EXPANDIBLE CORREGIDO CON MAX-HEIGHT: 500PX */
     .accordion-body {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.35s ease-out, padding 0.35s ease;
       background: #fafafa;
-      border-top: 1px dashed #eee;
+      border-top: 1px solid transparent;
       padding: 0 12px;
     }
 
     .accordion-step.expanded .accordion-body {
-      max-height: 180px;
+      max-height: 500px;
       padding: 12px;
+      border-top-color: #eee;
     }
 
     .detail-card {
@@ -378,7 +380,7 @@
 
     .detail-item {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 6px;
       font-size: 0.75rem;
       color: #555;
@@ -493,7 +495,7 @@
     <!-- HEADER CON LOGOS Y ESTADO VIVO -->
     <header>
       <div class="header-logos">
-        <!-- Logo MIMP Oficial Actualizado -->
+        <!-- Logo MIMP Oficial -->
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Logo_MIMP.png/640px-Logo_MIMP.png" alt="Logo MIMP" class="logo-mimp" loading="eager" fetchpriority="high">
         <img src="https://i.postimg.cc/RFND03MD/Logo-Peru-Responde-Logo-horizontal.png" alt="Logo Perú Responde" class="logo-peru-responde" loading="eager" fetchpriority="high">
       </div>
@@ -700,7 +702,7 @@
     const channelData = {
       digital: {
         title: 'Mesa de Partes Digital',
-        desc: 'Plataforma web institucionai disponible las 24 horas del día. Permite la recepción y registro inmediato de documentos y solicitudes con número de expediente.',
+        desc: 'Plataforma web institucional disponible las 24 horas del día. Permite la recepción y registro inmediato de documentos y solicitudes con número de expediente.',
         img: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop'
       },
       facilita: {
@@ -727,9 +729,9 @@
       btn.classList.add('active-btn');
     }
 
-    function selectChannel(card, channelKey) {
+    function selectChannel(cardElement, channelKey) {
       document.querySelectorAll('.interactive-card').forEach(c => c.classList.remove('selected'));
-      card.classList.add('selected');
+      cardElement.classList.add('selected');
 
       const data = channelData[channelKey];
       if (data) {
@@ -737,18 +739,18 @@
         const viewerTitle = document.getElementById('viewerTitle');
         const viewerDesc = document.getElementById('viewerDesc');
         
-        // Efecto visual al cambiar
-        viewerImg.style.opacity = '0.3';
+        // Transición de opacidad suave
+        viewerImg.style.opacity = '0';
         setTimeout(() => {
           viewerImg.src = data.img;
           viewerTitle.innerText = data.title;
           viewerDesc.innerText = data.desc;
           viewerImg.style.opacity = '1';
-        }, 150);
+        }, 200);
       }
     }
 
-    /* FUNCIÓN PARA MANEJAR ACORDEÓN DESPLEGABLE */
+    /* FUNCIÓN MANEJO DE ACORDEÓN DESPLEGABLE CORREGIDO */
     function toggleAccordion(element) {
       const isExpanded = element.classList.contains('expanded');
       
