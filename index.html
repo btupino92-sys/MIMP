@@ -5,18 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>MIMP - Acceso a la Información Pública</title>
 
-  <!-- Preconexión a servidores externos para máxima velocidad -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
-  <link rel="dns-prefetch" href="https://i.postimg.cc">
-
-  <!-- PRECARGA DE IMÁGENES EN CACHÉ DEL NAVEGADOR -->
-  <link rel="preload" as="image" href="https://i.postimg.cc/sgZ3pG64/MPD.png" fetchpriority="high">
-  <link rel="preload" as="image" href="https://i.postimg.cc/rsbvmQLP/FACILTA.png" fetchpriority="high">
-  <link rel="preload" as="image" href="https://i.postimg.cc/xTXQ2bSB/Whats-App-Image-2026-09-21-at-11-41-29-AM.jpg" fetchpriority="high">
-  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?q=80&w=600&auto=format&fit=crop">
 
   <style>
     :root {
@@ -145,14 +137,6 @@
       scroll-behavior: smooth;
     }
 
-    .content-area::-webkit-scrollbar {
-      width: 4px;
-    }
-    .content-area::-webkit-scrollbar-thumb {
-      background: rgba(200, 16, 46, 0.3);
-      border-radius: 10px;
-    }
-
     .info-section {
       display: none;
       animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -198,7 +182,7 @@
       padding: 12px 10px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: transform 0.15s ease, border-color 0.15s ease;
       box-shadow: 0 4px 10px rgba(0,0,0,0.03);
     }
 
@@ -225,7 +209,7 @@
       margin-top: 2px;
     }
 
-    /* VISOR DE FOTOS DINÁMICO DE CANALES */
+    /* CONTENEDOR MULTI-CAPA PARA CAMBIO INSTANTÁNEO DE FOTOS */
     .channel-viewer {
       margin-top: 14px;
       background: #ffffff;
@@ -234,15 +218,10 @@
       padding: 12px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.05);
       text-align: center;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
 
     .channel-viewer-img-container {
+      position: relative;
       width: 100%;
       height: 180px;
       border-radius: 12px;
@@ -252,13 +231,21 @@
       border: 1px solid #eee;
     }
 
-    .channel-viewer-img {
+    .layer-img {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: opacity 0.15s ease-out;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+      pointer-events: none;
+    }
+
+    .layer-img.active-layer {
       opacity: 1;
-      will-change: opacity;
+      pointer-events: auto;
     }
 
     .channel-viewer-title {
@@ -321,7 +308,6 @@
       align-items: center;
       justify-content: center;
       font-size: 0.85rem;
-      transition: all 0.3s ease;
     }
 
     .accordion-step.expanded .step-badge {
@@ -357,7 +343,6 @@
       color: var(--mimp-red);
     }
 
-    /* CONTENIDO EXPANDIBLE */
     .accordion-body {
       max-height: 0;
       overflow: hidden;
@@ -399,16 +384,32 @@
       font-weight: bold;
     }
 
-    /* PROPUESTA DE VALOR / MÍA IA */
+    /* PROPUESTA DE VALOR / MÍA IA (CLICKABLE) */
     .ia-banner {
       background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
       color: white;
       border-radius: 14px;
-      padding: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 193, 7, 0.3);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .ia-banner:active {
+      transform: scale(0.98);
+      background: linear-gradient(135deg, #0b0f19 0%, #111827 100%);
+    }
+
+    .ia-banner-left {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 12px;
     }
 
     .ia-avatar {
@@ -418,11 +419,24 @@
     .ia-info h4 {
       font-size: 0.9rem;
       color: #ffc107;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .ia-info p {
       font-size: 0.75rem;
       color: #d1d5db;
+    }
+
+    .ia-btn {
+      background: #ffc107;
+      color: #111;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 8px;
+      white-space: nowrap;
     }
 
     .value-item {
@@ -475,10 +489,6 @@
       gap: 4px;
     }
 
-    .btn-totem .btn-icon {
-      font-size: 1.1rem;
-    }
-
     .btn-totem.active-btn {
       background: #ffffff;
       color: var(--mimp-red);
@@ -500,7 +510,7 @@
 
   <div class="totem-frame">
     
-    <!-- HEADER CON LOGOS Y ESTADO EN VIVO -->
+    <!-- HEADER -->
     <header>
       <div class="header-logos">
         <img src="https://i.postimg.cc/q75cWYcZ/PCM-MIMP-(2).webp" alt="Logo MIMP" class="logo-mimp" loading="eager" fetchpriority="high">
@@ -511,10 +521,10 @@
       </div>
     </header>
 
-    <!-- PANTALLAS INTERACTIVAS -->
+    <!-- MAIN CONTENT -->
     <main class="content-area">
       
-      <!-- SECCIÓN 1: CANALES Y GALERÍA DE FOTOS DINÁMICA -->
+      <!-- SECCIÓN 1: CANALES -->
       <div id="canales" class="info-section active">
         <div class="section-header">
           <h2>Canales de Atención</h2>
@@ -547,17 +557,20 @@
           </div>
         </div>
 
-        <!-- VISOR DINÁMICO DE FOTOS Y DETALLES -->
-        <div class="channel-viewer" id="channelViewer">
+        <!-- VISOR CON CAPAS PRE-CARGADAS -->
+        <div class="channel-viewer">
           <div class="channel-viewer-img-container">
-            <img id="viewerImg" src="https://i.postimg.cc/sgZ3pG64/MPD.png" alt="Vista del canal" class="channel-viewer-img">
+            <img id="img-digital" src="https://i.postimg.cc/sgZ3pG64/MPD.png" class="layer-img active-layer" alt="Mesa Digital" loading="eager">
+            <img id="img-facilita" src="https://i.postimg.cc/rsbvmQLP/FACILTA.png" class="layer-img" alt="FACILITA" loading="eager">
+            <img id="img-presencial" src="https://i.postimg.cc/xTXQ2bSB/Whats-App-Image-2026-09-21-at-11-41-29-AM.jpg" class="layer-img" alt="Presencial" loading="eager">
+            <img id="img-correo" src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?q=80&w=600&auto=format&fit=crop" class="layer-img" alt="Correo Electrónico" loading="eager">
           </div>
           <div class="channel-viewer-title" id="viewerTitle">Mesa de Partes Digital</div>
           <div class="channel-viewer-desc" id="viewerDesc">Plataforma virtual disponible las 24 horas para la recepción de solicitudes formales de Acceso a la Información Pública desde cualquier dispositivo.</div>
         </div>
       </div>
 
-      <!-- SECCIÓN 2: LÍNEA DE TIEMPO DESPLEGABLE PROFESIONAL -->
+      <!-- SECCIÓN 2: PROCESOS -->
       <div id="procesos" class="info-section">
         <div class="section-header">
           <h2>Proceso de Atención</h2>
@@ -565,8 +578,6 @@
         </div>
 
         <div class="interactive-timeline">
-          
-          <!-- ETAPA 1 -->
           <div class="accordion-step expanded" onclick="toggleAccordion(this)">
             <div class="accordion-header">
               <div class="accordion-header-left">
@@ -589,7 +600,6 @@
             </div>
           </div>
 
-          <!-- ETAPA 2 -->
           <div class="accordion-step" onclick="toggleAccordion(this)">
             <div class="accordion-header">
               <div class="accordion-header-left">
@@ -612,7 +622,6 @@
             </div>
           </div>
 
-          <!-- ETAPA 3 -->
           <div class="accordion-step" onclick="toggleAccordion(this)">
             <div class="accordion-header">
               <div class="accordion-header-left">
@@ -634,7 +643,6 @@
               </div>
             </div>
           </div>
-
         </div>
 
         <div style="background: #fff3cd; color: #856404; padding: 10px; border-radius: 10px; font-size: 0.75rem; margin-top: 12px; text-align: center;">
@@ -642,20 +650,23 @@
         </div>
       </div>
 
-      <!-- SECCIÓN 3: PROPUESTA DE VALOR Y MÍA IA -->
+      <!-- SECCIÓN 3: PROPUESTAS Y MÍA IA REDIRECCIONABLE -->
       <div id="propuestas" class="info-section">
         <div class="section-header">
           <h2>Propuesta de Valor</h2>
           <p>Innovación pública al servicio del ciudadano</p>
         </div>
 
-        <!-- DESTACADO MÍA IA -->
-        <div class="ia-banner">
-          <div class="ia-avatar">🤖</div>
-          <div class="ia-info">
-            <h4>Mía - Asistente Virtual IA</h4>
-            <p>Atención automatizada 24/7 sobre servicios del MIMP.</p>
+        <!-- DESTACADO MÍA IA (CLICKABLE) -->
+        <div class="ia-banner" onclick="abrirAsistenteVirtual()">
+          <div class="ia-banner-left">
+            <div class="ia-avatar">🤖</div>
+            <div class="ia-info">
+              <h4>Mía - Asistente Virtual IA</h4>
+              <p>Atención automatizada 24/7 sobre servicios del MIMP.</p>
+            </div>
           </div>
+          <div class="ia-btn">Probar ahora ↗</div>
         </div>
 
         <div class="value-item">
@@ -685,7 +696,7 @@
 
     </main>
 
-    <!-- NAVEGACIÓN INFERIOR (TAB BAR) -->
+    <!-- NAVEGACIÓN BOTTOM -->
     <nav class="nav-buttons">
       <button class="btn-totem active-btn" onclick="mostrarSeccion('canales', this)">
         <span class="btn-icon">📞</span>
@@ -705,39 +716,26 @@
   </div>
 
   <script>
-    // Mapeo con enlaces directos optimizados
-    const channelData = {
+    const channelInfo = {
       digital: {
         title: 'Mesa de Partes Digital',
-        desc: 'Plataforma virtual disponible las 24 horas para la recepción de solicitudes formales de Acceso a la Información Pública desde cualquier dispositivo.',
-        img: 'https://i.postimg.cc/sgZ3pG64/MPD.png'
+        desc: 'Plataforma virtual disponible las 24 horas para la recepción de solicitudes formales de Acceso a la Información Pública desde cualquier dispositivo.'
       },
       facilita: {
         title: 'Plataforma FACILITA Perú',
-        desc: 'Herramienta digital simplificada del Estado para formular solicitudes directas bajo la Ley 27806 de Acceso a la Información Pública de forma rápida.',
-        img: 'https://i.postimg.cc/rsbvmQLP/FACILTA.png'
+        desc: 'Herramienta digital simplificada del Estado para formular solicitudes directas bajo la Ley 27806 de Acceso a la Información Pública de forma rápida.'
       },
       presencial: {
         title: 'Atención Presencial (Sede Camaná)',
-        desc: 'Atención directa en la Oficina de Atención al Ciudadano y Gestión Documental (OACGD) en Jr. Camaná 616, Cercado de Lima.',
-        img: 'https://i.postimg.cc/xTXQ2bSB/Whats-App-Image-2026-09-21-at-11-41-29-AM.jpg'
+        desc: 'Atención directa en la Oficina de Atención al Ciudadano y Gestión Documental (OACGD) en Jr. Camaná 616, Cercado de Lima.'
       },
       correo: {
         title: 'Correo Electrónico Oficial',
-        desc: 'Envío directo de formularios y consultas a la casilla institucional formal: informacionpublica@mimp.gob.pe con confirmación de recepción.',
-        img: 'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?q=80&w=600&auto=format&fit=crop'
+        desc: 'Envío directo de formularios y consultas a la casilla institucional formal: informacionpublica@mimp.gob.pe con confirmación de recepción.'
       }
     };
 
-    let currentSelectedKey = 'digital';
-
-    // PRE-CARGA ULTRA-RÁPIDA EN MEMORIA AL INICIAR
-    window.addEventListener('DOMContentLoaded', () => {
-      Object.values(channelData).forEach(channel => {
-        const imgPreload = new Image();
-        imgPreload.src = channel.img;
-      });
-    });
+    let activeKey = 'digital';
 
     function mostrarSeccion(idSeccion, btn) {
       document.querySelectorAll('.info-section').forEach(s => s.classList.remove('active'));
@@ -746,44 +744,35 @@
       btn.classList.add('active-btn');
     }
 
-    function selectChannel(cardElement, channelKey) {
-      // Evita recargas si se presiona la misma opción que ya está activa
-      if (currentSelectedKey === channelKey && cardElement.classList.contains('selected')) {
-        return;
-      }
+    function selectChannel(cardElement, key) {
+      if (activeKey === key) return;
+      activeKey = key;
 
-      currentSelectedKey = channelKey;
       document.querySelectorAll('.interactive-card').forEach(c => c.classList.remove('selected'));
       cardElement.classList.add('selected');
 
-      const data = channelData[channelKey];
-      if (data) {
-        const viewerImg = document.getElementById('viewerImg');
-        const viewerTitle = document.getElementById('viewerTitle');
-        const viewerDesc = document.getElementById('viewerDesc');
-        
-        // Cambio ultrarrápido con micro-transición
-        viewerImg.style.opacity = '0.2';
-        setTimeout(() => {
-          viewerImg.src = data.img;
-          viewerTitle.innerText = data.title;
-          viewerDesc.innerText = data.desc;
-          viewerImg.style.opacity = '1';
-        }, 80);
+      // Ocultar capa anterior y mostrar capa nueva instantáneamente
+      document.querySelectorAll('.layer-img').forEach(img => img.classList.remove('active-layer'));
+      const activeImg = document.getElementById(`img-${key}`);
+      if (activeImg) activeImg.classList.add('active-layer');
+
+      // Actualizar información
+      const info = channelInfo[key];
+      if (info) {
+        document.getElementById('viewerTitle').innerText = info.title;
+        document.getElementById('viewerDesc').innerText = info.desc;
       }
     }
 
-    /* MANEJO DE ACORDEÓN DESPLEGABLE */
     function toggleAccordion(element) {
       const isExpanded = element.classList.contains('expanded');
-      
-      document.querySelectorAll('.accordion-step').forEach(step => {
-        step.classList.remove('expanded');
-      });
+      document.querySelectorAll('.accordion-step').forEach(step => step.classList.remove('expanded'));
+      if (!isExpanded) element.classList.add('expanded');
+    }
 
-      if (!isExpanded) {
-        element.classList.add('expanded');
-      }
+    // REDIRECCIÓN AL ASISTENTE VIRTUAL
+    function abrirAsistenteVirtual() {
+      window.open('https://casillaelectronica.mimp.gob.pe/', '_blank');
     }
   </script>
 </body>
