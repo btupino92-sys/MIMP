@@ -5,12 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>MIMP - Acceso a la Información Pública</title>
 
-  <!-- Preconexión a servidores externos -->
+  <!-- Preconexión a servidores externos para máxima velocidad -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
   <link rel="dns-prefetch" href="https://i.postimg.cc">
+
+  <!-- PRECARGA DE IMÁGENES EN CACHÉ DEL NAVEGADOR -->
+  <link rel="preload" as="image" href="https://i.postimg.cc/sgZ3pG64/MPD.png" fetchpriority="high">
+  <link rel="preload" as="image" href="https://i.postimg.cc/rsbvmQLP/FACILTA.png" fetchpriority="high">
+  <link rel="preload" as="image" href="https://i.postimg.cc/xTXQ2bSB/Whats-App-Image-2026-09-21-at-11-41-29-AM.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?q=80&w=600&auto=format&fit=crop">
 
   <style>
     :root {
@@ -250,8 +256,9 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: opacity 0.3s ease, transform 0.4s ease;
+      transition: opacity 0.15s ease-out;
       opacity: 1;
+      will-change: opacity;
     }
 
     .channel-viewer-title {
@@ -350,7 +357,7 @@
       color: var(--mimp-red);
     }
 
-    /* CONTENIDO EXPANDIBLE CON MAX-HEIGHT FLEXIBLE */
+    /* CONTENIDO EXPANDIBLE */
     .accordion-body {
       max-height: 0;
       overflow: hidden;
@@ -698,11 +705,11 @@
   </div>
 
   <script>
-    // Configuración con las imágenes actualizadas de Postimages
+    // Mapeo con enlaces directos optimizados
     const channelData = {
       digital: {
         title: 'Mesa de Partes Digital',
-        desc: 'Plataforma web institucional disponible las 24 horas del día. Permite la recepción y registro inmediato de documentos y solicitudes con número de expediente.',
+        desc: 'Plataforma virtual disponible las 24 horas para la recepción de solicitudes formales de Acceso a la Información Pública desde cualquier dispositivo.',
         img: 'https://i.postimg.cc/sgZ3pG64/MPD.png'
       },
       facilita: {
@@ -722,6 +729,16 @@
       }
     };
 
+    let currentSelectedKey = 'digital';
+
+    // PRE-CARGA ULTRA-RÁPIDA EN MEMORIA AL INICIAR
+    window.addEventListener('DOMContentLoaded', () => {
+      Object.values(channelData).forEach(channel => {
+        const imgPreload = new Image();
+        imgPreload.src = channel.img;
+      });
+    });
+
     function mostrarSeccion(idSeccion, btn) {
       document.querySelectorAll('.info-section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.btn-totem').forEach(b => b.classList.remove('active-btn'));
@@ -730,6 +747,12 @@
     }
 
     function selectChannel(cardElement, channelKey) {
+      // Evita recargas si se presiona la misma opción que ya está activa
+      if (currentSelectedKey === channelKey && cardElement.classList.contains('selected')) {
+        return;
+      }
+
+      currentSelectedKey = channelKey;
       document.querySelectorAll('.interactive-card').forEach(c => c.classList.remove('selected'));
       cardElement.classList.add('selected');
 
@@ -739,18 +762,18 @@
         const viewerTitle = document.getElementById('viewerTitle');
         const viewerDesc = document.getElementById('viewerDesc');
         
-        // Transición de opacidad suave al cambiar de imagen
-        viewerImg.style.opacity = '0';
+        // Cambio ultrarrápido con micro-transición
+        viewerImg.style.opacity = '0.2';
         setTimeout(() => {
           viewerImg.src = data.img;
           viewerTitle.innerText = data.title;
           viewerDesc.innerText = data.desc;
           viewerImg.style.opacity = '1';
-        }, 200);
+        }, 80);
       }
     }
 
-    /* FUNCIÓN MANEJO DE ACORDEÓN DESPLEGABLE */
+    /* MANEJO DE ACORDEÓN DESPLEGABLE */
     function toggleAccordion(element) {
       const isExpanded = element.classList.contains('expanded');
       
