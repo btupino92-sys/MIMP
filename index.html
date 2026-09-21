@@ -384,7 +384,7 @@
       font-weight: bold;
     }
 
-    /* PROPUESTA DE VALOR / MÍA IA (CLICKABLE) */
+    /* PROPUESTA DE VALOR / BANNER INTERACTIVO MÍA IA */
     .ia-banner {
       background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
       color: white;
@@ -397,13 +397,14 @@
       margin-bottom: 12px;
       cursor: pointer;
       transition: all 0.2s ease;
-      border: 1px solid rgba(255, 193, 7, 0.3);
+      border: 1px solid rgba(255, 193, 7, 0.4);
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     .ia-banner:active {
-      transform: scale(0.98);
+      transform: scale(0.97);
       background: linear-gradient(135deg, #0b0f19 0%, #111827 100%);
+      border-color: #ffc107;
     }
 
     .ia-banner-left {
@@ -753,7 +754,7 @@
 
       // Ocultar capa anterior y mostrar capa nueva instantáneamente
       document.querySelectorAll('.layer-img').forEach(img => img.classList.remove('active-layer'));
-      const activeImg = document.getElementById(`img-${key}`);
+      const activeImg = document.getElementById('img-' + key);
       if (activeImg) activeImg.classList.add('active-layer');
 
       // Actualizar información
