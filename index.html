@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Preconexión a servidores externos para acelerar carga -->
+  <!-- Preconexión a servidores externos -->
   <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
   <link rel="dns-prefetch" href="https://i.postimg.cc">
 
@@ -45,7 +45,7 @@
       align-items: center;
     }
 
-    /* TÓTEM VERTICAL (RESPONSIVO Y MODERNO) */
+    /* TÓTEM VERTICAL */
     .totem-frame {
       width: 100%;
       max-width: 490px;
@@ -84,14 +84,14 @@
     }
 
     .logo-mimp {
-      height: 38px;
-      max-width: 48%;
+      height: 42px;
+      max-width: 55%;
       object-fit: contain;
     }
 
     .logo-peru-responde {
-      height: 48px;
-      max-width: 50%;
+      height: 44px;
+      max-width: 42%;
       object-fit: contain;
     }
 
@@ -218,7 +218,54 @@
       margin-top: 2px;
     }
 
-    /* TIMELINE DE PROCESOS INTERACTIVO Y DESPLEGABLE (NUEVO) */
+    /* VISOR DE FOTOS DINÁMICO DE CANALES */
+    .channel-viewer {
+      margin-top: 14px;
+      background: #ffffff;
+      border: 1px solid #eaeaea;
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .channel-viewer-img-container {
+      width: 100%;
+      height: 180px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f5f5f5;
+      margin-bottom: 10px;
+      border: 1px solid #eee;
+    }
+
+    .channel-viewer-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .channel-viewer-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--mimp-red);
+    }
+
+    .channel-viewer-desc {
+      font-size: 0.78rem;
+      color: #555;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* TIMELINE DE PROCESOS INTERACTIVO Y DESPLEGABLE */
     .interactive-timeline {
       display: flex;
       flex-direction: column;
@@ -301,7 +348,7 @@
       color: var(--mimp-red);
     }
 
-    /* CONTENIDO EXPANDIBLE PROFESIONAL */
+    /* CONTENIDO EXPANDIBLE */
     .accordion-body {
       max-height: 0;
       overflow: hidden;
@@ -340,56 +387,6 @@
     .detail-item span {
       color: var(--mimp-red);
       font-weight: bold;
-    }
-
-    /* SIMULADOR INTERACTIVO */
-    .simulator-box {
-      background: #f8f9fa;
-      border: 1px dashed var(--mimp-red);
-      border-radius: 14px;
-      padding: 12px;
-      margin-top: 12px;
-    }
-
-    .simulator-box label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: #333;
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    .simulator-input {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 0.8rem;
-      margin-bottom: 8px;
-    }
-
-    .btn-simulate {
-      width: 100%;
-      background: var(--mimp-red);
-      color: white;
-      border: none;
-      padding: 9px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.82rem;
-      cursor: pointer;
-    }
-
-    .ticket-result {
-      display: none;
-      margin-top: 10px;
-      background: #e8f5e9;
-      border: 1px solid #a5d6a7;
-      color: #1b5e20;
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 0.78rem;
-      text-align: center;
     }
 
     /* PROPUESTA DE VALOR / MÍA IA */
@@ -496,7 +493,8 @@
     <!-- HEADER CON LOGOS Y ESTADO VIVO -->
     <header>
       <div class="header-logos">
-        <img src="https://i.postimg.cc/7h1HKLP9/PCM-MIMP-(1).webp" alt="Logo MIMP" class="logo-mimp" loading="eager" fetchpriority="high">
+        <!-- Logo MIMP Oficial Actualizado -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Logo_MIMP.png/640px-Logo_MIMP.png" alt="Logo MIMP" class="logo-mimp" loading="eager" fetchpriority="high">
         <img src="https://i.postimg.cc/RFND03MD/Logo-Peru-Responde-Logo-horizontal.png" alt="Logo Perú Responde" class="logo-peru-responde" loading="eager" fetchpriority="high">
       </div>
       <div class="header-badge">
@@ -507,55 +505,51 @@
     <!-- PANTALLAS INTERACTIVAS -->
     <main class="content-area">
       
-      <!-- SECCIÓN 1: CANALES Y SIMULADOR -->
-      <div id="canales" class="info-section">
+      <!-- SECCIÓN 1: CANALES Y GALERÍA DE FOTOS DINÁMICA -->
+      <div id="canales" class="info-section active">
         <div class="section-header">
           <h2>Canales de Atención</h2>
-          <p>Selecciona una opción para simular un trámite</p>
+          <p>Selecciona una opción para ver detalles e imágenes</p>
         </div>
 
         <div class="grid-cards">
-          <div class="interactive-card selected" onclick="selectChannel(this, 'Mesa de Partes Digital')">
+          <div class="interactive-card selected" onclick="selectChannel(this, 'digital')">
             <div class="card-icon">💻</div>
             <div class="card-title">Mesa Digital</div>
             <div class="card-sub">Atención 24/7 en web</div>
           </div>
 
-          <div class="interactive-card" onclick="selectChannel(this, 'Plataforma FACILITA')">
+          <div class="interactive-card" onclick="selectChannel(this, 'facilita')">
             <div class="card-icon">🚀</div>
             <div class="card-title">FACILITA</div>
             <div class="card-sub">Trámite rápido Ley 27806</div>
           </div>
 
-          <div class="interactive-card" onclick="selectChannel(this, 'Mesa Presencial')">
+          <div class="interactive-card" onclick="selectChannel(this, 'presencial')">
             <div class="card-icon">🏢</div>
             <div class="card-title">Presencial</div>
-            <div class="card-sub">Sede central Jirón Camaná</div>
+            <div class="card-sub">Sede Camaná / OACGD</div>
           </div>
 
-          <div class="interactive-card" onclick="selectChannel(this, 'Correo Electrónico')">
+          <div class="interactive-card" onclick="selectChannel(this, 'correo')">
             <div class="card-icon">✉️</div>
             <div class="card-title">Correo Elec.</div>
             <div class="card-sub">informacionpublica@mimp.gob.pe</div>
           </div>
         </div>
 
-        <!-- SIMULADOR EN VIVO PARA LA EXPOSICIÓN -->
-        <div class="simulator-box">
-          <label id="channel-label">Simulador de Solicitud (Canal: Mesa Digital)</label>
-          <input type="text" id="solicitudInput" class="simulator-input" placeholder="Ej: Solicito presupuesto institucional...">
-          <button class="btn-simulate" onclick="generarTicket()">⚡ Generar Solicitud Demo</button>
-          
-          <div id="ticketResult" class="ticket-result">
-            ✅ <strong>¡Solicitud Generada!</strong><br>
-            Expediente: <span id="expedienteNum">MIMP-2026-00892</span><br>
-            Plazo de respuesta: <strong>10 días hábiles max.</strong>
+        <!-- VISOR DINÁMICO DE FOTOS Y DETALLES -->
+        <div class="channel-viewer" id="channelViewer">
+          <div class="channel-viewer-img-container">
+            <img id="viewerImg" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop" alt="Vista del canal" class="channel-viewer-img">
           </div>
+          <div class="channel-viewer-title" id="viewerTitle">Mesa de Partes Digital</div>
+          <div class="channel-viewer-desc" id="viewerDesc">Plataforma virtual disponible las 24 horas para la recepción de solicitudes formales de Acceso a la Información Pública desde cualquier dispositivo.</div>
         </div>
       </div>
 
       <!-- SECCIÓN 2: LÍNEA DE TIEMPO DESPLEGABLE PROFESIONAL -->
-      <div id="procesos" class="info-section active">
+      <div id="procesos" class="info-section">
         <div class="section-header">
           <h2>Proceso de Atención</h2>
           <p>Toca cada etapa para desplegar detalles técnicos</p>
@@ -682,13 +676,13 @@
 
     </main>
 
-    <!-- NAVEGACIÓN INFERIOR (TIPO TAB BAR) -->
+    <!-- NAVEGACIÓN INFERIOR (TAB BAR) -->
     <nav class="nav-buttons">
-      <button class="btn-totem" onclick="mostrarSeccion('canales', this)">
+      <button class="btn-totem active-btn" onclick="mostrarSeccion('canales', this)">
         <span class="btn-icon">📞</span>
         <span>Canales</span>
       </button>
-      <button class="btn-totem active-btn" onclick="mostrarSeccion('procesos', this)">
+      <button class="btn-totem" onclick="mostrarSeccion('procesos', this)">
         <span class="btn-icon">📋</span>
         <span>Proceso</span>
       </button>
@@ -702,7 +696,29 @@
   </div>
 
   <script>
-    let selectedChannelName = 'Mesa Digital';
+    // Datos de los 4 canales con fotos y descripciones
+    const channelData = {
+      digital: {
+        title: 'Mesa de Partes Digital',
+        desc: 'Plataforma web institucionai disponible las 24 horas del día. Permite la recepción y registro inmediato de documentos y solicitudes con número de expediente.',
+        img: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop'
+      },
+      facilita: {
+        title: 'Plataforma FACILITA Perú',
+        desc: 'Herramienta digital simplificada del Estado para formular solicitudes directas bajo la Ley 27806 de Acceso a la Información Pública de forma rápida.',
+        img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop'
+      },
+      presencial: {
+        title: 'Atención Presencial (Sede Camaná)',
+        desc: 'Atención directa en la Oficina de Atención al Ciudadano y Gestión Documental (OACGD) en Jr. Camaná 616, Cercado de Lima.',
+        img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop'
+      },
+      correo: {
+        title: 'Correo Electrónico Oficial',
+        desc: 'Envío directo de formularios y consultas a la casilla institucional formal: informacionpublica@mimp.gob.pe con confirmación de recepción.',
+        img: 'https://images.unsplash.com/photo-1596526131083-e8c633c948d2?q=80&w=600&auto=format&fit=crop'
+      }
+    };
 
     function mostrarSeccion(idSeccion, btn) {
       document.querySelectorAll('.info-section').forEach(s => s.classList.remove('active'));
@@ -711,37 +727,38 @@
       btn.classList.add('active-btn');
     }
 
-    function selectChannel(card, channelName) {
+    function selectChannel(card, channelKey) {
       document.querySelectorAll('.interactive-card').forEach(c => c.classList.remove('selected'));
       card.classList.add('selected');
-      selectedChannelName = channelName;
-      document.getElementById('channel-label').innerText = `Simulador de Solicitud (Canal: ${channelName})`;
+
+      const data = channelData[channelKey];
+      if (data) {
+        const viewerImg = document.getElementById('viewerImg');
+        const viewerTitle = document.getElementById('viewerTitle');
+        const viewerDesc = document.getElementById('viewerDesc');
+        
+        // Efecto visual al cambiar
+        viewerImg.style.opacity = '0.3';
+        setTimeout(() => {
+          viewerImg.src = data.img;
+          viewerTitle.innerText = data.title;
+          viewerDesc.innerText = data.desc;
+          viewerImg.style.opacity = '1';
+        }, 150);
+      }
     }
 
     /* FUNCIÓN PARA MANEJAR ACORDEÓN DESPLEGABLE */
     function toggleAccordion(element) {
       const isExpanded = element.classList.contains('expanded');
       
-      // Cerrar todos los demás
       document.querySelectorAll('.accordion-step').forEach(step => {
         step.classList.remove('expanded');
       });
 
-      // Si no estaba desplegado, desplegar el clickeado
       if (!isExpanded) {
         element.classList.add('expanded');
       }
-    }
-
-    function generarTicket() {
-      const input = document.getElementById('solicitudInput').value;
-      if (!input.trim()) {
-        alert('Por favor, escribe una solicitud ficticia para probar la demostración.');
-        return;
-      }
-      const randomNum = Math.floor(100000 + Math.random() * 900000);
-      document.getElementById('expedienteNum').innerText = `EXP-${randomNum}-2026/MIMP`;
-      document.getElementById('ticketResult').style.display = 'block';
     }
   </script>
 </body>
