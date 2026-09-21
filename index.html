@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>MIMP - Acceso a la Información Pública</title>
+  
+  <!-- Preconexión a servidores externos -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Preconexión a servidores externos -->
   <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
   <link rel="dns-prefetch" href="https://i.postimg.cc">
 
@@ -28,6 +28,7 @@
       margin: 0;
       padding: 0;
       user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -269,7 +270,7 @@
     /* TIMELINE DE PROCESOS INTERACTIVO Y DESPLEGABLE */
     .interactive-timeline {
       display: flex;
-      flex-direction: column;
+      flex-direction: flex-col;
       gap: 10px;
     }
 
@@ -492,10 +493,9 @@
 
   <div class="totem-frame">
     
-    <!-- HEADER CON LOGOS Y ESTADO VIVO -->
+    <!-- HEADER CON LOGOS Y ESTADO EN VIVO -->
     <header>
       <div class="header-logos">
-        <!-- Logo MIMP Oficial -->
         <img src="https://i.postimg.cc/q75cWYcZ/PCM-MIMP-(2).webp" alt="Logo MIMP" class="logo-mimp" loading="eager" fetchpriority="high">
         <img src="https://i.postimg.cc/RFND03MD/Logo-Peru-Responde-Logo-horizontal.png" alt="Logo Perú Responde" class="logo-peru-responde" loading="eager" fetchpriority="high">
       </div>
@@ -750,7 +750,7 @@
       }
     }
 
-    /* FUNCIÓN MANEJO DE ACORDEÓN DESPLEGABLE CORREGIDO */
+    /* FUNCIÓN MANEJO DE ACORDEÓN DESPLEGABLE */
     function toggleAccordion(element) {
       const isExpanded = element.classList.contains('expanded');
       
