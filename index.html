@@ -16,6 +16,7 @@
       --mimp-dark-red: #7a0016;
       --mimp-accent: #ff4757;
       --mimp-gold: #ffc107;
+      --mimp-green: #00875a;
       --bg-dark: #0f0507;
       --card-bg: rgba(255, 255, 255, 0.96);
       --glass-border: rgba(255, 255, 255, 0.25);
@@ -61,7 +62,7 @@
       overflow: hidden;
     }
 
-    /* REGLA RESPONSIVA PARA COMPUTADORAS Y LAPTOPS (PANTALLAS HORIZONTALES) */
+    /* REGLA RESPONSIVA PARA COMPUTADORAS Y LAPTOPS */
     @media (min-aspect-ratio: 1/1) and (min-width: 600px) {
       .totem-frame {
         width: 100%;
@@ -286,11 +287,11 @@
       line-height: 1.45;
     }
 
-    /* TIMELINE DE PROCESOS INTERACTIVO */
+    /* TIMELINE DE PROCESOS INTERACTIVO (5 ETAPAS FIEL AL FOLLETO) */
     .interactive-timeline {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
     .accordion-step {
@@ -311,7 +312,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 16px;
+      padding: 12px 14px;
       cursor: pointer;
       background: #fff;
     }
@@ -319,12 +320,12 @@
     .accordion-header-left {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
     .step-badge {
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
       background: #f5f5f5;
       color: #555;
       font-weight: 800;
@@ -332,7 +333,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      flex-shrink: 0;
     }
 
     .accordion-step.expanded .step-badge {
@@ -341,24 +343,13 @@
     }
 
     .accordion-header h4 {
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       font-weight: 700;
       color: #222;
     }
 
-    .time-tag {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--mimp-red);
-      background: #ffeef0;
-      padding: 4px 10px;
-      border-radius: 6px;
-      display: inline-block;
-      margin-top: 3px;
-    }
-
     .chevron-icon {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #888;
       transition: transform 0.3s ease;
     }
@@ -374,39 +365,19 @@
       transition: max-height 0.35s ease-out, padding 0.35s ease;
       background: #fafafa;
       border-top: 1px solid transparent;
-      padding: 0 16px;
+      padding: 0 14px;
     }
 
     .accordion-step.expanded .accordion-body {
-      max-height: 500px;
-      padding: 16px;
+      max-height: 300px;
+      padding: 12px 14px;
       border-top-color: #eee;
     }
 
     .detail-card {
       font-size: 0.82rem;
       color: #444;
-      line-height: 1.5;
-    }
-
-    .detail-list {
-      margin-top: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .detail-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 0.8rem;
-      color: #555;
-    }
-
-    .detail-item span {
-      color: var(--mimp-red);
-      font-weight: bold;
+      line-height: 1.45;
     }
 
     /* PROPUESTA DE VALOR / BANNER INTERACTIVO MÍA IA */
@@ -554,57 +525,57 @@
     <!-- MAIN CONTENT -->
     <main class="content-area">
       
-      <!-- SECCIÓN 1: CANALES -->
+      <!-- SECCIÓN 1: CANALES (DATOS EXACTOS DEL FOLLETO) -->
       <div id="canales" class="info-section active">
         <div class="section-header">
           <h2>Canales de Atención</h2>
-          <p>Selecciona una opción para ver detalles e imágenes</p>
+          <p>¿Cómo puedes acceder a la información pública del MIMP?</p>
         </div>
 
         <div class="grid-cards">
-          <div class="interactive-card selected" onclick="selectChannel(this, 'digital')">
-            <div class="card-icon">💻</div>
-            <div class="card-title">Mesa Digital</div>
-            <div class="card-sub">Atención 24/7 en web</div>
-          </div>
-
-          <div class="interactive-card" onclick="selectChannel(this, 'facilita')">
-            <div class="card-icon">🚀</div>
-            <div class="card-title">FACILITA</div>
-            <div class="card-sub">Trámite rápido Ley 27806</div>
-          </div>
-
-          <div class="interactive-card" onclick="selectChannel(this, 'presencial')">
+          <div class="interactive-card selected" onclick="selectChannel(this, 'presencial')">
             <div class="card-icon">🏢</div>
             <div class="card-title">Presencial</div>
-            <div class="card-sub">Sede Camaná / OACGD</div>
+            <div class="card-sub">Mesa de Partes</div>
+          </div>
+
+          <div class="interactive-card" onclick="selectChannel(this, 'digital')">
+            <div class="card-icon">💻</div>
+            <div class="card-title">Mesa Digital</div>
+            <div class="card-sub">Trámite en línea</div>
           </div>
 
           <div class="interactive-card" onclick="selectChannel(this, 'correo')">
             <div class="card-icon">✉️</div>
             <div class="card-title">Correo Elec.</div>
-            <div class="card-sub">informacionpublica@mimp.gob.pe</div>
+            <div class="card-sub">Atención oficial</div>
+          </div>
+
+          <div class="interactive-card" onclick="selectChannel(this, 'facilita')">
+            <div class="card-icon">🚀</div>
+            <div class="card-title">FACILITA</div>
+            <div class="card-sub">Plataforma Gob.pe</div>
           </div>
         </div>
 
-        <!-- VISOR CON CAPAS PRE-CARGADAS -->
+        <!-- VISOR CON CAPAS PRE-CARGADAS Y DETALLES DEL FOLLETO -->
         <div class="channel-viewer">
           <div class="channel-viewer-img-container">
-            <img id="img-digital" src="https://i.postimg.cc/sgZ3pG64/MPD.png" class="layer-img active-layer" alt="Mesa Digital" loading="eager">
-            <img id="img-facilita" src="https://i.postimg.cc/rsbvmQLP/FACILTA.png" class="layer-img" alt="FACILITA" loading="eager">
-            <img id="img-presencial" src="https://i.postimg.cc/xTXQ2bSB/Whats-App-Image-2026-09-21-at-11-41-29-AM.jpg" class="layer-img" alt="Presencial" loading="eager">
+            <img id="img-presencial" src="https://i.postimg.cc/xTXQ2bSB/Whats-App-Image-2026-09-21-at-11-41-29-AM.jpg" class="layer-img active-layer" alt="Atención Presencial" loading="eager">
+            <img id="img-digital" src="https://i.postimg.cc/sgZ3pG64/MPD.png" class="layer-img" alt="Mesa de partes digital" loading="eager">
             <img id="img-correo" src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?q=80&w=600&auto=format&fit=crop" class="layer-img" alt="Correo Electrónico" loading="eager">
+            <img id="img-facilita" src="https://i.postimg.cc/rsbvmQLP/FACILTA.png" class="layer-img" alt="Plataforma FACILITA" loading="eager">
           </div>
-          <div class="channel-viewer-title" id="viewerTitle">Mesa de Partes Digital</div>
-          <div class="channel-viewer-desc" id="viewerDesc">Plataforma virtual disponible las 24 horas para la recepción de solicitudes formales de Acceso a la Información Pública desde cualquier dispositivo.</div>
+          <div class="channel-viewer-title" id="viewerTitle">Mesa de partes presencial</div>
+          <div class="channel-viewer-desc" id="viewerDesc">Jr. Camaná N.º 616 (piso 1), Cercado de Lima. Presentación física de solicitudes en la sede institucional.</div>
         </div>
       </div>
 
-      <!-- SECCIÓN 2: PROCESOS -->
+      <!-- SECCIÓN 2: PROCESO (LOS 5 PASOS DEL FOLLETO Y TIEMPOS) -->
       <div id="procesos" class="info-section">
         <div class="section-header">
-          <h2>Proceso de Atención</h2>
-          <p>Toca cada etapa para desplegar detalles técnicos</p>
+          <h2>¿Cómo es el proceso de atención?</h2>
+          <p>Conoce la ruta oficial de tu solicitud de información</p>
         </div>
 
         <div class="interactive-timeline">
@@ -612,20 +583,13 @@
             <div class="accordion-header">
               <div class="accordion-header-left">
                 <div class="step-badge">1</div>
-                <div>
-                  <h4>Recepción y Registro</h4>
-                  <span class="time-tag">Plazo: Día 1</span>
-                </div>
+                <h4>Recepción y registro de la solicitud</h4>
               </div>
               <span class="chevron-icon">▼</span>
             </div>
             <div class="accordion-body">
               <div class="detail-card">
-                Ingreso oficial del pedido al sistema institucional MIMP.
-                <div class="detail-list">
-                  <div class="detail-item"><span>•</span> Generación inmediata de N° de Expediente.</div>
-                  <div class="detail-item"><span>•</span> Asignación automatizada a la oficina competente.</div>
-                </div>
+                Registro formal e ingreso del expediente al sistema de gestión documental MIMP.
               </div>
             </div>
           </div>
@@ -634,20 +598,13 @@
             <div class="accordion-header">
               <div class="accordion-header-left">
                 <div class="step-badge">2</div>
-                <div>
-                  <h4>Búsqueda y Análisis</h4>
-                  <span class="time-tag">Plazo: Días 1 a 4</span>
-                </div>
+                <h4>Derivación a Unidad de Organización</h4>
               </div>
               <span class="chevron-icon">▼</span>
             </div>
             <div class="accordion-body">
               <div class="detail-card">
-                Localización y revisión formal del contenido solicitado.
-                <div class="detail-list">
-                  <div class="detail-item"><span>•</span> Búsqueda en archivos físicos y digitales MIMP.</div>
-                  <div class="detail-item"><span>•</span> Filtro de protección de datos personales y reservados.</div>
-                </div>
+                Envío inmediato de la solicitud al área técnica poseedora de la información.
               </div>
             </div>
           </div>
@@ -656,77 +613,112 @@
             <div class="accordion-header">
               <div class="accordion-header-left">
                 <div class="step-badge">3</div>
-                <div>
-                  <h4>Respuesta y Entrega</h4>
-                  <span class="time-tag">Plazo Máx.: 10 Días Hábiles</span>
-                </div>
+                <h4>Atención por Unidad de Organización</h4>
               </div>
               <span class="chevron-icon">▼</span>
             </div>
             <div class="accordion-body">
               <div class="detail-card">
-                Envío oficial de la información al ciudadano.
-                <div class="detail-list">
-                  <div class="detail-item"><span>•</span> Notificación por correo, Facilita o presencial.</div>
-                  <div class="detail-item"><span>•</span> Evaluación de calidad y satisfacción del servicio.</div>
-                </div>
+                Búsqueda, análisis y recopilación documental por la oficina competente.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-step" onclick="toggleAccordion(this)">
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <div class="step-badge">4</div>
+                <h4>Proyección y notificación de respuesta</h4>
+              </div>
+              <span class="chevron-icon">▼</span>
+            </div>
+            <div class="accordion-body">
+              <div class="detail-card">
+                Elaboración de la respuesta oficial e informe técnico para el ciudadano.
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-step" onclick="toggleAccordion(this)">
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <div class="step-badge">5</div>
+                <h4>Remisión de información</h4>
+              </div>
+              <span class="chevron-icon">▼</span>
+            </div>
+            <div class="accordion-body">
+              <div class="detail-card">
+                Entrega efectiva al solicitante según el canal elegido, cumpliendo el plazo legal.
               </div>
             </div>
           </div>
         </div>
 
-        <div style="background: #fff3cd; color: #856404; padding: 12px; border-radius: 12px; font-size: 0.8rem; margin-top: 14px; text-align: center;">
-          💡 <strong>Principio de Transparencia:</strong> No se requiere justificar el motivo de la consulta.
+        <div style="background: #e6f4ea; color: #0d652d; padding: 12px; border-radius: 12px; font-size: 0.8rem; margin-top: 14px; text-align: center; border: 1px solid rgba(0, 135, 90, 0.2);">
+          ⏱️ <strong>Plazo de atención:</strong> Se atiende en <strong>10 días hábiles</strong>, salvo excepciones establecidas por la Ley N.º 27806.
         </div>
       </div>
 
-      <!-- SECCIÓN 3: PROPUESTAS Y MÍA IA REDIRECCIONABLE -->
+      <!-- SECCIÓN 3: PROPUESTAS / VALOR E IA (ACTUALIZADO CON ACCIONES DEL FOLLETO) -->
       <div id="propuestas" class="info-section">
         <div class="section-header">
-          <h2>Propuesta de Valor</h2>
-          <p>Innovación pública al servicio del ciudadano</p>
+          <h2>Más Información, Más Derechos</h2>
+          <p>Tu información también es un derecho que fortalece la democracia</p>
         </div>
 
-        <!-- DESTACADO MÍA IA (CLICKABLE) -->
+        <!-- DESTACADO MÍA IA / ASISTENTE VIRTUAL -->
         <div class="ia-banner" onclick="abrirAsistenteVirtual()">
           <div class="ia-banner-left">
             <div class="ia-avatar">🤖</div>
             <div class="ia-info">
               <h4>Mía - Asistente Virtual IA</h4>
-              <p>Atención automatizada 24/7 sobre servicios del MIMP.</p>
+              <p>Consultas y orientación sobre trámites MIMP 24/7.</p>
             </div>
           </div>
           <div class="ia-btn">Probar ahora ↗</div>
         </div>
 
         <div class="value-item">
-          <div class="value-icon">🛡️</div>
+          <div class="value-icon">📐</div>
           <div class="value-text">
-            <strong>Transparencia Activa</strong>
-            <span>Acceso abierto a datos e informes institucionales.</span>
+            <strong>Estandarización del Servicio</strong>
+            <span>Optimizamos los procedimientos para atender solicitudes con agilidad.</span>
           </div>
         </div>
 
         <div class="value-item">
-          <div class="value-icon">♿</div>
+          <div class="value-icon">🔗</div>
           <div class="value-text">
-            <strong>Atención Inclusiva</strong>
-            <span>Canales adaptados para personas con discapacidad.</span>
+            <strong>Coordinación Fortalecida</strong>
+            <span>Mayor integración con Unidades de Organización y oficinas.</span>
           </div>
         </div>
 
         <div class="value-item">
-          <div class="value-icon">🌱</div>
+          <div class="value-icon">🔔</div>
           <div class="value-text">
-            <strong>Gobierno Cercano</strong>
-            <span>Reducción de barreras en la gestión pública.</span>
+            <strong>Seguimiento y Alertas</strong>
+            <span>Panel con alertas automáticas para garantizar el cumplimiento de plazos.</span>
           </div>
+        </div>
+
+        <div class="value-item">
+          <div class="value-icon">📢</div>
+          <div class="value-text">
+            <strong>Difusión y Capacitación</strong>
+            <span>Potenciamos la transparencia activa para llegar a todas las personas.</span>
+          </div>
+        </div>
+
+        <div style="background: #fff3cd; color: #856404; padding: 10px; border-radius: 12px; font-size: 0.78rem; text-align: center;">
+          💡 <strong>Sin Justificación:</strong> No necesitas explicar por qué solicitas la información pública.
         </div>
       </div>
 
     </main>
 
-    <!-- NAVEGACIÓN BOTTOM -->
+    <!-- NAVEGACIÓN BOTTOM (MANTENIENDO LOS TRES APARTADOS SOLICITADOS) -->
     <nav class="nav-buttons">
       <button class="btn-totem active-btn" onclick="mostrarSeccion('canales', this)">
         <span class="btn-icon">📞</span>
@@ -747,25 +739,25 @@
 
   <script>
     const channelInfo = {
-      digital: {
-        title: 'Mesa de Partes Digital',
-        desc: 'Plataforma virtual disponible las 24 horas para la recepción de solicitudes formales de Acceso a la Información Pública desde cualquier dispositivo.'
-      },
-      facilita: {
-        title: 'Plataforma FACILITA Perú',
-        desc: 'Herramienta digital simplificada del Estado para formular solicitudes directas bajo la Ley 27806 de Acceso a la Información Pública de forma rápida.'
-      },
       presencial: {
-        title: 'Atención Presencial (Sede Camaná)',
-        desc: 'Atención directa en la Oficina de Atención al Ciudadano y Gestión Documental (OACGD) en Jr. Camaná 616, Cercado de Lima.'
+        title: 'Mesa de partes presencial',
+        desc: 'Jr. Camaná N.º 616 (piso 1), Cercado de Lima. Presentación física de solicitudes en la sede institucional.'
+      },
+      digital: {
+        title: 'Mesa de partes digital',
+        desc: 'Plataforma virtual disponible las 24 horas para ingresar tus solicitudes formales desde cualquier lugar.'
       },
       correo: {
-        title: 'Correo Electrónico Oficial',
-        desc: 'Envío directo de formularios y consultas a la casilla institucional formal: informacionpublica@mimp.gob.pe con confirmación de recepción.'
+        title: 'Correo electrónico oficial',
+        desc: 'Envío de solicitudes a la casilla institucional: informacionpublica@mimp.gob.pe para atención oficial.'
+      },
+      facilita: {
+        title: 'Plataforma FACILITA',
+        desc: 'Herramienta digital simplificada del Estado para gestionar trámites rápidos bajo la Ley N.º 27806.'
       }
     };
 
-    let activeKey = 'digital';
+    let activeKey = 'presencial';
 
     function mostrarSeccion(idSeccion, btn) {
       document.querySelectorAll('.info-section').forEach(s => s.classList.remove('active'));
