@@ -274,6 +274,15 @@
       pointer-events: auto;
     }
 
+    /* ESTILO PARA IMÁGENES CLICKEABLES */
+    .clickable-layer {
+      cursor: pointer;
+    }
+
+    .clickable-layer:hover {
+      filter: brightness(0.95);
+    }
+
     .channel-viewer-title {
       font-size: 1.05rem;
       font-weight: 800;
@@ -287,7 +296,7 @@
       line-height: 1.45;
     }
 
-    /* TIMELINE DE PROCESOS INTERACTIVO (5 ETAPAS FIEL AL FOLLETO) */
+    /* TIMELINE DE PROCESOS INTERACTIVO (5 ETAPAS) */
     .interactive-timeline {
       display: flex;
       flex-direction: column;
@@ -525,7 +534,7 @@
     <!-- MAIN CONTENT -->
     <main class="content-area">
       
-      <!-- SECCIÓN 1: CANALES (DATOS EXACTOS DEL FOLLETO) -->
+      <!-- SECCIÓN 1: CANALES -->
       <div id="canales" class="info-section active">
         <div class="section-header">
           <h2>Canales de Atención</h2>
@@ -558,20 +567,29 @@
           </div>
         </div>
 
-        <!-- VISOR CON CAPAS PRE-CARGADAS Y DETALLES DEL FOLLETO -->
+        <!-- VISOR CON CAPAS Y ENLACES EN LAS IMÁGENES -->
         <div class="channel-viewer">
           <div class="channel-viewer-img-container">
             <img id="img-presencial" src="https://i.postimg.cc/xTXQ2bSB/Whats-App-Image-2026-09-21-at-11-41-29-AM.jpg" class="layer-img active-layer" alt="Atención Presencial" loading="eager">
-            <img id="img-digital" src="https://i.postimg.cc/sgZ3pG64/MPD.png" class="layer-img" alt="Mesa de partes digital" loading="eager">
+            
+            <!-- ENLACE MESA DE PARTES DIGITAL -->
+            <a href="https://sgd.mimp.gob.pe/mpde/#/TipoPersona" target="_blank">
+              <img id="img-digital" src="https://i.postimg.cc/sgZ3pG64/MPD.png" class="layer-img clickable-layer" alt="Mesa de Partes Digital" loading="eager">
+            </a>
+
             <img id="img-correo" src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?q=80&w=600&auto=format&fit=crop" class="layer-img" alt="Correo Electrónico" loading="eager">
-            <img id="img-facilita" src="https://i.postimg.cc/rsbvmQLP/FACILTA.png" class="layer-img" alt="Plataforma FACILITA" loading="eager">
+            
+            <!-- ENLACE FACILITA -->
+            <a href="https://facilita.gob.pe/t/2496" target="_blank">
+              <img id="img-facilita" src="https://i.postimg.cc/rsbvmQLP/FACILTA.png" class="layer-img clickable-layer" alt="Plataforma FACILITA" loading="eager">
+            </a>
           </div>
           <div class="channel-viewer-title" id="viewerTitle">Mesa de partes presencial</div>
           <div class="channel-viewer-desc" id="viewerDesc">Jr. Camaná N.º 616 (piso 1), Cercado de Lima. Presentación física de solicitudes en la sede institucional.</div>
         </div>
       </div>
 
-      <!-- SECCIÓN 2: PROCESO (LOS 5 PASOS DEL FOLLETO Y TIEMPOS) -->
+      <!-- SECCIÓN 2: PROCESO -->
       <div id="procesos" class="info-section">
         <div class="section-header">
           <h2>¿Cómo es el proceso de atención?</h2>
@@ -660,14 +678,13 @@
         </div>
       </div>
 
-      <!-- SECCIÓN 3: PROPUESTAS / VALOR E IA (ACTUALIZADO CON ACCIONES DEL FOLLETO) -->
+      <!-- SECCIÓN 3: VALOR E IA -->
       <div id="propuestas" class="info-section">
         <div class="section-header">
           <h2>Más Información, Más Derechos</h2>
           <p>Tu información también es un derecho que fortalece la democracia</p>
         </div>
 
-        <!-- DESTACADO MÍA IA / ASISTENTE VIRTUAL -->
         <div class="ia-banner" onclick="abrirAsistenteVirtual()">
           <div class="ia-banner-left">
             <div class="ia-avatar">🤖</div>
@@ -718,7 +735,7 @@
 
     </main>
 
-    <!-- NAVEGACIÓN BOTTOM (MANTENIENDO LOS TRES APARTADOS SOLICITADOS) -->
+    <!-- NAVEGACIÓN BOTTOM -->
     <nav class="nav-buttons">
       <button class="btn-totem active-btn" onclick="mostrarSeccion('canales', this)">
         <span class="btn-icon">📞</span>
@@ -744,7 +761,7 @@
         desc: 'Jr. Camaná N.º 616 (piso 1), Cercado de Lima. Presentación física de solicitudes en la sede institucional.'
       },
       digital: {
-        title: 'Mesa de partes digital',
+        title: 'Mesa de partes digital (Clic en la imagen para acceder)',
         desc: 'Plataforma virtual disponible las 24 horas para ingresar tus solicitudes formales desde cualquier lugar.'
       },
       correo: {
@@ -752,7 +769,7 @@
         desc: 'Envío de solicitudes a la casilla institucional: informacionpublica@mimp.gob.pe para atención oficial.'
       },
       facilita: {
-        title: 'Plataforma FACILITA',
+        title: 'Plataforma FACILITA (Clic en la imagen para acceder)',
         desc: 'Herramienta digital simplificada del Estado para gestionar trámites rápidos bajo la Ley N.º 27806.'
       }
     };
